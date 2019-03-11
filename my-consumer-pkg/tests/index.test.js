@@ -14,23 +14,25 @@ test("it works", async () => {
   expect(getByText("my thing"));
 });
 
-test("it lazy loads a local component", async () => {
-  const LazyLocalThing = React.lazy(() => import("../src/LocalThing"));
-  const { getByText, debug } = render(
-    <React.Suspense fallback="Loading...">
-      <LazyLocalThing />
-    </React.Suspense>
-  );
-  debug();
-  await waitForElement(() => getByText("my local thing"));
-  debug();
-  expect(getByText("my local thing"));
-});
+describe("these fail with 'Not Supported'", () => {
+  test("it lazy loads a local component", async () => {
+    const LazyLocalThing = React.lazy(() => import("../src/LocalThing"));
+    const { getByText, debug } = render(
+      <React.Suspense fallback="Loading...">
+        <LazyLocalThing />
+      </React.Suspense>
+    );
+    debug();
+    await waitForElement(() => getByText("my local thing"));
+    debug();
+    expect(getByText("my local thing"));
+  });
 
-test("it says not supported, like wtf", async () => {
-  const { getByText, debug } = render(<LazyThing />);
-  debug();
-  await waitForElement(() => getByText("my thing"));
-  debug();
-  expect(getByText("my thing"));
+  test("it says not supported, like wtf", async () => {
+    const { getByText, debug } = render(<LazyThing />);
+    debug();
+    await waitForElement(() => getByText("my thing"));
+    debug();
+    expect(getByText("my thing"));
+  });
 });
