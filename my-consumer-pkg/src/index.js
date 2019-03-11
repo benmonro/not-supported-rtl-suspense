@@ -1,8 +1,8 @@
 import React from "react";
 
-export function LazyThing() {
-  const MyLazyThing = React.lazy(() => import("my-package/lib/my-thing"));
+const MyLazyThing = React.lazy(() => import("my-package/lib/my-thing"));
 
+export default function LazyThing() {
   return (
     <React.Suspense fallback="Loading...">
       <MyLazyThing />
